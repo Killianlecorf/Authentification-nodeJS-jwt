@@ -1,24 +1,23 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import mongoose, { ConnectOptions } from 'mongoose';
 import bodyParser from 'body-parser';
+import databaseConnection from './src/config/connectDB';
+import cors from 'cors';
+import UserRoute  from './src/routes/user.routes';
 
 dotenv.config()
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.json());
+app.use(cors());
+app.use('/api/user', UserRoute);
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Bonjour, monde !');
 });
 
-const uri = process.env.DBNAME ; 
-
-try {
-    mongoose.connect(uri);
-    console.log('Connexion à la base de données MongoDB réussie');
-} catch (error) {
-    console.error('Erreur lors de la connexion à la base de données MongoDB', error);
-    }
+databaseConnection()
 
 app.listen(port, () => {
   console.log(`Le serveur est en écoute sur le port ${port}`);
