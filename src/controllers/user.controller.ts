@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { User, IUser } from '../models/user.model';
 
 // GET /users
@@ -66,3 +66,20 @@ export const updateUser = async (req: Request, res: Response) => {
       res.status(500).json({ error: 'Une erreur est survenue lors de la suppression de l\'utilisateur.' });
     }
   };
+
+
+//   export const authenticateUserController = (req: Request, res: Response, next: NextFunction) => {
+//     // Ici, vous pouvez ajouter votre logique d'authentification, par exemple,
+//     // en vérifiant si l'utilisateur a un jeton d'authentification valide dans l'en-tête de la requête.
+//     // Si l'authentification échoue, vous pouvez envoyer une réponse d'erreur appropriée.
+  
+//     const authToken = req.headers.authorization;
+//     if (!authToken) {
+//       return res.status(401).json({ error: 'Authentification requise.' });
+//     }
+//     if (authToken !== 'dummy_token') {
+//       return res.status(401).json({ error: 'Jeton d\'authentification invalide.' });
+//     }
+  
+//     next();
+//   };

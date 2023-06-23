@@ -1,4 +1,5 @@
 import express from 'express';
+import { authenticateUser } from '../middlewares/auth.middleware';
 import {
     getAllUsers,
     getUserById,
@@ -15,7 +16,7 @@ router.get('/:id', getUserById);
 router.post('/', createUser);
 
 // Routes protégées
-router.put('/:id', updateUser);
-router.delete('/:id', deleteUser);
+router.put('/:id',authenticateUser, updateUser);
+router.delete('/:id',authenticateUser, deleteUser);
 
 export default router;
