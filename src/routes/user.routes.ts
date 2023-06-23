@@ -4,6 +4,7 @@ import {
     getAllUsers,
     getUserById,
     createUser,
+    getUserLogin,
     updateUser,
     deleteUser
   } from '../controllers/user.controller';
@@ -14,9 +15,10 @@ const router = express.Router();
 router.get('/', getAllUsers);
 router.get('/:id', getUserById);
 router.post('/', createUser);
+router.post('/login', getUserLogin);
 
 // Routes protégées
-router.put('/:id',authenticateUser, updateUser);
-router.delete('/:id',authenticateUser, deleteUser);
+router.put('/:id', authenticateUser, updateUser);
+router.delete('/:id', authenticateUser, deleteUser);
 
 export default router;
